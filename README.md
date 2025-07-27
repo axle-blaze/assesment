@@ -108,11 +108,5 @@ PUT    /api/v1/cart/{cart_id}/items/quantity
 
 - Ensure the backend server is running before starting the frontend UI.
 - All data is stored in memory (no database).
-- For development/demo purposes only.
 
 ---
-
-## License
-
-MIT License
-# assesment
