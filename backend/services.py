@@ -10,6 +10,7 @@ import uuid
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Business Logic Classes
 class TaxCalculator:
     """Handles tax calculations for different product categories"""
     
@@ -35,9 +36,9 @@ class DiscountCalculator:
     }
     
     @classmethod
-    def calculate_item_discount(cls, item: ProductItem, subtotal_after_tax: Decimal, total_electronics_qty: int) -> Decimal:
-        """Apply item-specific discounts (Electronics 15% off if total electronics quantity > 2)"""
-        if item.category == ProductCategory.ELECTRONICS and total_electronics_qty > 2:
+    def calculate_item_discount(cls, item: ProductItem, subtotal_after_tax: Decimal) -> Decimal:
+        """Apply item-specific discounts (Electronics 15% off if quantity > 2)"""
+        if item.category == ProductCategory.ELECTRONICS and item.quantity > 2:
             return (subtotal_after_tax * Decimal('0.15')).quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
         return Decimal('0.00')
     
@@ -192,18 +193,40 @@ class ShoppingCartService:
             timestamp=datetime.now()
         )
     
+    def get_all_carts(self) -> List[str]:
+        """Get list of all cart IDs"""
+        return list(self.carts.keys())
+    
+    def clear_cart(self, cart_id: str) -> bool:
+        """Clear all items from a cart"""
+        if cart_id not in self.carts:
+            return False
+        
+        cart = self.carts[cart_id]
+        cart['items'] = {}
+        
+        # Recalculate summary with empty items
+        summary = self._calculate_cart_summary([], cart['customer'])
+        cart['summary'] = summary
+        
+        logger.info(f"Cleared all items from cart {cart_id}")
+        return True
+    
+    def delete_cart(self, cart_id: str) -> bool:
+        """Delete a cart completely"""
+        if cart_id not in self.carts:
+            return False
+        
+        del self.carts[cart_id]
+        logger.info(f"Deleted cart {cart_id}")
+        return True
+    
     def _calculate_cart_summary(self, items: List[ProductItem], customer: Customer) -> CartSummary:
         """Calculate comprehensive cart summary with all discounts applied in correct order"""
         item_breakdowns = []
         cart_subtotal = Decimal('0.00')
         total_tax = Decimal('0.00')
         total_item_discounts = Decimal('0.00')
-        
-        # STEP 0: Calculate total electronics quantity for item discount eligibility
-        total_electronics_qty = sum(
-            item.quantity for item in items 
-            if item.category == ProductCategory.ELECTRONICS
-        )
         
         # Step 1: Process each item and calculate item-specific discounts
         for item in items:
@@ -212,10 +235,8 @@ class ShoppingCartService:
             tax_amount = TaxCalculator.calculate_tax(subtotal_before_tax, item.category)
             subtotal_after_tax = subtotal_before_tax + tax_amount
             
-            # Calculate item-specific discount (Electronics 15% off if TOTAL electronics quantity > 2)
-            item_discount = DiscountCalculator.calculate_item_discount(
-                item, subtotal_after_tax, total_electronics_qty
-            )
+            # Calculate item-specific discount (Electronics 15% off if quantity > 2)
+            item_discount = DiscountCalculator.calculate_item_discount(item, subtotal_after_tax)
             final_item_total = subtotal_after_tax - item_discount
             
             # Create breakdown
