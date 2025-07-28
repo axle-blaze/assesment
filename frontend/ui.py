@@ -4,7 +4,7 @@ import requests
 import json
 
 # Configuration
-API_BASE_URL = "https://assesments-nsjj.onrender.com"
+API_BASE_URL = "https://assesments-nsjj.onrender.com/api/v1"
 
 st.title("🛒 Shopping Cart System")
 
