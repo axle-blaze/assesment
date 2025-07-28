@@ -20,7 +20,7 @@ A production-grade shopping cart system with a FastAPI backend and a Streamlit f
 ## Project Structure
 
 ```
-Coding-Assesment/
+assesment/
 │
 ├── backend/
 │   ├── __init__.py
@@ -44,7 +44,7 @@ Coding-Assesment/
 
 ```sh
 git clone https://github.com/axle-blaze/assesment.git
-cd Coding-Assesment
+cd assesment
 ```
 
 ### 2. Create and Activate a Virtual Environment
