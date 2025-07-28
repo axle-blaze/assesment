@@ -1,115 +1,142 @@
 # 🛒 Shopping Cart System
 
-A production-grade shopping cart system with a FastAPI backend and a Streamlit frontend UI.
+A production-grade shopping cart system built with a **FastAPI** backend and an interactive **Streamlit** frontend. Easily manage carts, apply discounts, and explore RESTful APIs—all in a clean, deployable setup.
 
 ---
 
-## Features
+## 🌐 Live Demo
 
-- **Create Cart:** Add items and customer info, then create a new cart.
-- **Manage Cart:** Load an existing cart by ID to view, update, or remove items.
-- **Discounts Applied:**
-  - **Electronics:** 15% off if quantity > 2
-  - **Bulk:** 10% off if total > $200
-  - **Loyalty:** Bronze (5%), Silver (10%), Gold (15%)
-- **API Endpoints:** RESTful endpoints for cart operations.
-- **Interactive UI:** Built with Streamlit for easy cart management.
+- 🔹 **Frontend (UI):** [cart-discount.streamlit.app](https://cart-discount.streamlit.app/)
+- 🔹 **Backend (API):** [assesments-nsjj.onrender.com](https://assesments-nsjj.onrender.com/)
+- 🔹 **API Docs (Swagger):** [assesments-nsjj.onrender.com/docs](https://assesments-nsjj.onrender.com/docs)
 
 ---
 
-## Project Structure
+## 🚀 Features
+
+- **🛍️ Create Cart:** Add items, choose loyalty levels, and initialize a cart.
+- **🧾 Manage Cart:** View, update, or delete cart items using cart ID.
+- **🏷️ Smart Discounts:**
+  - **Electronics Discount:** 15% off if quantity > 2
+  - **Bulk Discount:** 10% off if total > $200
+  - **Loyalty Discount:** 
+    - Bronze – 5%
+    - Silver – 10%
+    - Gold – 15%
+- **📡 RESTful API:** FastAPI-based backend with clean endpoints.
+- **💻 Interactive UI:** Built with Streamlit for easy, visual cart management.
+- **⚡ In-Memory Storage:** No external database required—great for prototyping.
+
+---
+
+## 🗂️ Project Structure
 
 ```
 assesment/
 │
 ├── backend/
 │   ├── __init__.py
-│   ├── api.py
-│   ├── main.py
-│   ├── models.py
-│   ├── services.py
-│   └── shopping_cart.py
+│   ├── api.py             # API routes
+│   ├── main.py            # App entry point
+│   ├── models.py          # Data models
+│   ├── services.py        # Business logic and discount rules
+│   └── shopping_cart.py   # Cart operations and storage
 │
 ├── frontend/
-│   └── ui.py
+│   └── ui.py              # Streamlit app
 │
-└── requirement.txt
+└── requirement.txt        # Project dependencies
 ```
 
 ---
 
-## Getting Started
+## 🛠️ Local Setup
 
 ### 1. Clone the Repository
 
-```sh
+```bash
 git clone https://github.com/axle-blaze/assesment.git
 cd assesment
 ```
 
-### 2. Create and Activate a Virtual Environment
+### 2. Create and Activate Virtual Environment
 
-```sh
+```bash
 python -m venv venv
-.\venv\Scripts\activate   # On Windows
-
-source venv/bin/activate  # On Mac/Linux
-
 ```
+
+- **On Windows:**
+  ```bash
+  .\venv\Scripts\activate
+  ```
+
+- **On Mac/Linux:**
+  ```bash
+  source venv/bin/activate
+  ```
 
 ### 3. Install Dependencies
 
-```sh
+```bash
 pip install -r requirement.txt
 ```
 
-### 4. Run the Backend (FastAPI)
+### 4. Run the Backend
 
-```sh
+```bash
 python backend/main.py
 ```
-- The API will be available at [http://localhost:8000](http://localhost:8000)
-- API docs: [http://localhost:8000/docs](http://localhost:8000/docs)
 
-### 5. Run the Frontend (Streamlit UI)
+- Local API: [http://localhost:8000](http://localhost:8000)  
+- Swagger Docs: [http://localhost:8000/docs](http://localhost:8000/docs)
 
-```sh
+### 5. Run the Frontend
+
+```bash
 streamlit run frontend/ui.py
 ```
-- The UI will open at [http://localhost:8501](http://localhost:8501)
+
+- Local UI: [http://localhost:8501](http://localhost:8501)
 
 ---
 
-## API Endpoints
+## 📬 API Endpoints
 
-```
-POST   /api/v1/cart
-GET    /api/v1/cart/{cart_id}
-POST   /api/v1/cart/{cart_id}/items
-DELETE /api/v1/cart/{cart_id}/items/{item_id}
-PUT    /api/v1/cart/{cart_id}/items/quantity
-```
-
----
-
-## Usage
-
-1. **Create Cart:**  
-   - Add items and select customer loyalty level.
-   - Click "Create Cart" to generate a new cart.
-
-2. **Manage Cart:**  
-   - Enter an existing Cart ID to load and manage the cart.
-   - Update quantities, remove items, or add new items.
-
-3. **Check API Health:**  
-   - Use the sidebar button to check if the backend API is running.
+| Method | Endpoint                                 | Description                   |
+|--------|------------------------------------------|-------------------------------|
+| POST   | `/api/v1/cart`                           | Create a new cart             |
+| GET    | `/api/v1/cart/{cart_id}`                 | Get cart details              |
+| POST   | `/api/v1/cart/{cart_id}/items`           | Add item to existing cart     |
+| DELETE | `/api/v1/cart/{cart_id}/items/{item_id}` | Remove item from cart         |
+| PUT    | `/api/v1/cart/{cart_id}/items/quantity`  | Update quantity of an item    |
 
 ---
 
-## Notes
+## 🧪 Usage Guide
 
-- Ensure the backend server is running before starting the frontend UI.
-- All data is stored in memory (no database).
+### ✅ Create Cart
+- Add items with name, category, price, and quantity.
+- Choose the customer’s loyalty tier.
+- Click **Create Cart** to generate a new cart ID.
+
+### 🛠 Manage Existing Cart
+- Input an existing **Cart ID**.
+- Add, remove, or update items directly in the UI.
+- View automatically updated prices and discounts.
+
+### 🔍 Check API Health
+- Use the “Check API” button in the sidebar to verify connectivity.
 
 ---
+
+## 📌 Notes
+
+- The backend must be running before launching the frontend.
+- All data is stored in memory—no persistence after restart.
+- Ideal for demos, PoCs, or learning API + UI integration.
+
+---
+
+## 📣 Contribution
+
+Feel free to fork the repo, suggest improvements, or create issues. PRs are welcome!
