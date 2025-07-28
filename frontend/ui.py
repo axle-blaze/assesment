@@ -2,9 +2,20 @@
 import streamlit as st
 import requests
 import json
+import streamlit as st
 
-# Configuration
-API_BASE_URL = "https://assesments-nsjj.onrender.com/api/v1"
+from streamlit_javascript_eval import streamlit_javascript_eval
+
+url = streamlit_javascript_eval(js_expressions="window.location.href")
+
+if url:
+    if "localhost" in url:
+        st.write("Running on localhost")
+        API_BASE_URL = "http://localhost:5000/api/v1"
+    else:
+        st.write("Running on server")
+        API_BASE_URL = "https://assesments-nsjj.onrender.com/api/v1"
+        
 
 st.title("🛒 Shopping Cart System")
 
