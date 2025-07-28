@@ -43,7 +43,7 @@ Coding-Assesment/
 ### 1. Clone the Repository
 
 ```sh
-git clone <your-repo-url>
+git clone https://github.com/axle-blaze/assesment.git
 cd Coding-Assesment
 ```
 
@@ -52,6 +52,9 @@ cd Coding-Assesment
 ```sh
 python -m venv venv
 .\venv\Scripts\activate   # On Windows
+
+source venv/bin/activate  # On Mac/Linux
+
 ```
 
 ### 3. Install Dependencies
