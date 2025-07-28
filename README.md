@@ -136,6 +136,17 @@ streamlit run frontend/ui.py
 - Ideal for demos, PoCs, or learning API + UI integration.
 
 ---
+## 🖼️ Screenshots
+
+### 🛒 Create Cart Page
+![Create Cart](https://github.com/user-attachments/assets/b53164e5-de33-4aed-b0a3-6e1bb7ac4afa)
+
+### 🧾 Carts Raw input
+![Manage Cart](https://github.com/user-attachments/assets/f515722a-b6c0-41ae-a28d-da09ffbc0bd0)
+
+### 📊 Discounts Applied
+![Discounts Page](https://github.com/user-attachments/assets/ae7f0f49-dd58-49c6-ba1b-a8b092d67c58)
+
 
 ## 📣 Contribution
 
