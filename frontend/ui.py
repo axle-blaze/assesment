@@ -6,12 +6,12 @@ import streamlit as st
 
 import os
 
+
 if os.getenv("ENV") != "deployment":
-        st.write("Running on localhost")
-        API_BASE_URL = "http://localhost:5000/api/v1"
-        
+    st.write("🔴 Offline Mode – Running on localhost")
+    API_BASE_URL = "http://localhost:5000/api/v1"
 else:
-    st.write("Running on server")
+    st.write("🟢 Online Mode – Running on server")
     API_BASE_URL = "https://assesments-nsjj.onrender.com/api/v1"
         
 
